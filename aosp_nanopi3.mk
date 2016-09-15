@@ -13,6 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-$(call inherit-product, device/friendly-arm/nanopi3/full_nanopi3.mk)
+
+# Inherit from those products. Most specific first.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+
+# Inherit device configuration
+$(call inherit-product, device/friendly-arm/nanopi3/device.mk)
 
 PRODUCT_NAME := aosp_nanopi3
+PRODUCT_DEVICE := nanopi3
+PRODUCT_MANUFACTURER := FriendlyARM
+PRODUCT_BRAND := FriendlyARM
+PRODUCT_MODEL := NanoPi 3
+
+PRODUCT_GMS_CLIENTID_BASE := android-friendlyarm
+
+TARGET_VENDOR_PRODUCT_NAME := NanoPi3
+TARGET_VENDOR_DEVICE_NAME := NanoPi3
+
+PRODUCT_BUILD_PROP_OVERRIDES += TARGET_DEVICE=NanoPi3 PRODUCT_NAME=NanoPi3
+
+TARGET_VENDOR := FriendlyARM

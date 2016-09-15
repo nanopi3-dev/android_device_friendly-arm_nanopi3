@@ -1,5 +1,4 @@
 ro.sf.lcd_density=160
-ro.net.captive_server=112.124.9.243
 
 # hdmi support
 persist.demo.hdmirotationlock=1

@@ -14,16 +14,22 @@
 # limitations under the License.
 #
 
-TARGET_BOARD_INFO_FILE := device/friendly-arm/nanopi3/board-info.txt
+PLATFORM_PATH := device/friendly-arm/nanopi3
 
-TARGET_BOARD_PLATFORM  := slsiap
+TARGET_BOARD_INFO_FILE := $(PLATFORM_PATH)/board-info.txt
+
+# Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := nanopi3
 
+# Platform
+TARGET_BOARD_PLATFORM  := slsiap
+
+# Architecture
+TARGET_ARCH     := arm
+TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_ABI  := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP  := true
-TARGET_ARCH     := arm
-TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT  := cortex-a9
 ARCH_ARM_HAVE_TLS_REGISTER := true
 
@@ -37,16 +43,13 @@ TARGET_BOOTLOADER_IS_2ND := false
 
 TARGET_PROVIDES_INIT_RC  := true
 
-# recovery
-TARGET_RECOVERY_FSTAB := device/friendly-arm/nanopi3/recovery.fstab
-TARGET_RELEASETOOLS_EXTENSIONS := device/friendly-arm/nanopi3
-TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_nanopi3
-
-# certificate
-PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/friendly-arm/nanopi3/security/releasekey
+# Recovery
+TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/recovery.fstab
+TARGET_RELEASETOOLS_EXTENSIONS := $(PLATFORM_PATH)
+# TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_nanopi3
 
 # opengl
-BOARD_EGL_CFG := device/friendly-arm/nanopi3/egl.cfg
+BOARD_EGL_CFG := $(PLATFORM_PATH)/egl.cfg
 
 USE_OPENGL_RENDERER := true
 IGN_EGL_BUFFERCOUNT := true
@@ -60,7 +63,7 @@ BOARD_USES_CARD_SPDIF    := false
 # Bluetooth
 BOARD_HAVE_BLUETOOTH     := true
 BOARD_HAVE_BLUETOOTH_BCM := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/friendly-arm/nanopi3/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(PLATFORM_PATH)/bluetooth
 
 # camera
 BOARD_HAS_CAMERA := true
@@ -74,8 +77,9 @@ BOARD_USES_RESOL := true
 BOARD_HAS_SENSOR := false
 BOARD_SENSOR_TYPE := general
 
-# external ffmpeg plugin
--include device/friendly-arm/nanopi3/BoardConfigFFmpeg.mk
+# ffmpeg
+EN_FFMPEG_EXTRACTOR := false
+EN_FFMPEG_AUDIO_DEC := false
 
 # Nexell Dual Audio
 EN_DUAL_AUDIO := false
@@ -106,33 +110,29 @@ SLSIAP_HWC_VERSION := 2
 
 # sepolicy
 BOARD_SEPOLICY_DIRS := \
-	device/friendly-arm/nanopi3/sepolicy
+    $(PLATFORM_PATH)/sepolicy
 
 BOARD_SEPOLICY_UNION := \
-	file_contexts \
-	genfs_contexts \
-	adbd.te \
-	app.te \
-	boardinit.te \
-	device.te \
-	domain.te \
-	file.te \
-	mediaserver.te \
-	surfaceflinger.te \
-	system_server.te \
-	init.te \
-	kernel.te \
-	servicemanager.te \
-	netd.te \
-	healthd.te \
-	sdcardd.te
+    file_contexts \
+    genfs_contexts \
+    adbd.te \
+    app.te \
+    boardinit.te \
+    device.te \
+    domain.te \
+    file.te \
+    mediaserver.te \
+    surfaceflinger.te \
+    system_server.te \
+    init.te \
+    kernel.te \
+    servicemanager.te \
+    netd.te \
+    healthd.te \
+    sdcardd.te
 
 # ART
 ART_USE_HSPACE_COMPACT := true
-WITH_DEXPREOPT := true
-
-# for google gms
-#-include vendor/google/gapps/BoardConfigPartial.mk
 
 # packaging for emmc, sd
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -143,4 +143,3 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 2466250752 # 2.3GB
 BOARD_CACHEIMAGE_PARTITION_SIZE    := 448790528  # 428MB
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE  := ext4
 BOARD_FLASH_BLOCK_SIZE := 4096
-
