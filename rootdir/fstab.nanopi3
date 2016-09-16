@@ -7,7 +7,7 @@
 /dev/block/platform/dw_mmc.0/by-num/p3              /cache              ext4      noatime,nosuid,nodev,nomblk_io_submit,errors=panic    wait,check
 /dev/block/platform/dw_mmc.0/by-num/p7              /data               ext4      noatime,nosuid,nodev,nomblk_io_submit,errors=panic    wait,check
 
-/devices/platform/dw_mmc.2/mmc_host/mmc2/mmc2       /storage/sdcard1    auto      defaults    voldmanaged=sdcard1:auto,noemulatedsd
+/devices/platform/dw_mmc.2/mmc_host/mmc2/mmc2       /storage/sdcard1    auto      defaults    voldmanaged=sdcard1:auto,encryptable=userdata
 /devices/platform/nxp-ehci/usb1/1-1/1-1:1.0         /storage/usbdisk1   auto      defaults    voldmanaged=usbdisk1:auto,noemulatedsd
 /devices/platform/nxp-ehci/usb1/1-1/1-1.1           /storage/usbdisk1   auto      defaults    voldmanaged=usbdisk1:auto,noemulatedsd
 /devices/platform/nxp-ehci/usb1/1-1/1-1.2           /storage/usbdisk2   auto      defaults    voldmanaged=usbdisk2:auto,noemulatedsd

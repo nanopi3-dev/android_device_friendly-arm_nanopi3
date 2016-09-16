@@ -128,6 +128,9 @@ BOARD_HAS_RIL := false
 # HWC
 SLSIAP_HWC_VERSION := 2
 
+# Sepolicy
+BOARD_SEPOLICY_DIRS += $(PLATFORM_PATH)/sepolicy
+
 # ART
 ART_USE_HSPACE_COMPACT := true
 

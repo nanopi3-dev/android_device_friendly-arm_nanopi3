@@ -1,55 +1,19 @@
 import init.nanopi3.usb.rc
 
-on init
-    start watchdogd
+on fs
+    wait /dev/block/platform/dw_mmc.0
+    mount_all fstab.nanopi3
+    swapon_all fstab.nanopi3
 
-    # See storage config details at http://source.android.com/tech/storage/
-    mkdir /mnt/shell/emulated 0700 shell shell
-    mkdir /storage/emulated 0555 root root
+# Permissions for backlight
+    chmod 0660 /sys/class/backlight/pwm-backlight/brightness
+    chown system system /sys/class/backlight/pwm-backlight/brightness
 
-    export EXTERNAL_STORAGE /storage/emulated/legacy
-    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
-    export EMULATED_STORAGE_TARGET /storage/emulated
-    export SECONDARY_STORAGE /storage/sdcard1
-
-    # Support legacy paths
-    symlink /storage/emulated/legacy /sdcard
-    symlink /storage/emulated/legacy /mnt/sdcard
-    symlink /storage/emulated/legacy /storage/sdcard0
-    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
-
-    # external sdcard
-    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
-    mkdir /storage/sdcard1 0700 root root
-
-    # usb disk1
-    mkdir /mnt/media_rw/usbdisk1 0700 media_rw media_rw
-    mkdir /storage/usbdisk1 0700 root root
-
-    # usb disk2
-    mkdir /mnt/media_rw/usbdisk2 0700 media_rw media_rw
-    mkdir /storage/usbdisk2 0700 root root
-
-    # usb disk3
-    mkdir /mnt/media_rw/usbdisk3 0700 media_rw media_rw
-    mkdir /storage/usbdisk3 0700 root root
-
-    # usb disk4
-    mkdir /mnt/media_rw/usbdisk4 0700 media_rw media_rw
-    mkdir /storage/usbdisk4 0700 root root
-
-    # usb disk5
-    mkdir /mnt/media_rw/usbdisk5 0700 media_rw media_rw
-    mkdir /storage/usbdisk5 0700 root root
-
-    # usb disk6
-    mkdir /mnt/media_rw/usbdisk6 0700 media_rw media_rw
-    mkdir /storage/usbdisk6 0700 root root
+# Permissions for display sync
+    chown system system /sys/devices/platform/display/active.0
+    chown system system /sys/devices/platform/display/active.1
 
 on post-fs-data
-    mkdir /data/media 0770 media_rw media_rw
-    restorecon_recursive /data/media
-
     setprop vold.post_fs_data_done 1
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
@@ -67,7 +31,7 @@ on boot
     # egl debugging
     setprop debug.egl.callstack 1
 
-    # disable camera zsl 
+    # disable camera zsl
     setprop camera.disable_zsl_mode 1
 
     # disable opengl preloading
@@ -84,16 +48,6 @@ on boot
 
     # sd wakeup
     setprop pm.sdwake.enabled true
-
-    # for ota
-    setprop otaupdater.otaid nexell_slsiap_nanopi3_lm
-    setprop otaupdater.otaver 12000
-    setprop otaupdater.otatime 20160301-0800
-    setprop otaupdater.sdcard.os cache
-    setprop otaupdater.sdcard.recovery cache
-    # for nexell ota
-    setprop otaupdater.server http://210.219.52.221
-    setprop otaupdater.vendor NEXELL
 
     # override init.rc to keep plenty of large order chunks around
     # to improve allocation times
@@ -119,61 +73,9 @@ on boot
     # Set vr power policy as Coarse demand
     # write /sys/devices/platform/vr.0/power_policy coarse_demand
 
-on fs
-    mount_all /fstab.nanopi3
-    setprop ro.crypto.fuse_sdcard true
-    insmod /system/lib/modules/vr.ko
-
-# Permissions for backlight
-    chmod 0660 /sys/class/backlight/pwm-backlight/brightness
-    chown system system /sys/class/backlight/pwm-backlight/brightness
-
-# Permissions for display sync
-    chown system system /sys/devices/platform/display/active.0
-    chown system system /sys/devices/platform/display/active.1
-
 # lowmem setting
 on property:sys.sysctl.extra_free_kbytes=*
     write /sys/module/lowmemorykiller/parameters/minfree "6144,7680,9216,10752,12288,15360"
-
-# virtual sdcard daemon running as media_rw (1023)
-service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
-    class late_start
-
-service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -w 1023 \
-    -d /mnt/media_rw/sdcard1 /storage/sdcard1
-    class late_start
-    disabled
-
-service fuse_usbdisk1 /system/bin/sdcard -u 1023 -g 1023 -w 1023 \
-    -d /mnt/media_rw/usbdisk1 /storage/usbdisk1
-    class late_start
-    disabled
-
-service fuse_usbdisk2 /system/bin/sdcard -u 1023 -g 1023 -w 1023 \
-    -d /mnt/media_rw/usbdisk2 /storage/usbdisk2
-    class late_start
-    disabled
-
-service fuse_usbdisk3 /system/bin/sdcard -u 1023 -g 1023 -w 1023 \
-    -d /mnt/media_rw/usbdisk3 /storage/usbdisk3
-    class late_start
-    disabled
-
-service fuse_usbdisk4 /system/bin/sdcard -u 1023 -g 1023 -w 1023 \
-    -d /mnt/media_rw/usbdisk4 /storage/usbdisk4
-    class late_start
-    disabled
-
-service fuse_usbdisk5 /system/bin/sdcard -u 1023 -g 1023 -w 1023 \
-    -d /mnt/media_rw/usbdisk5 /storage/usbdisk5
-    class late_start
-    disabled
-
-service fuse_usbdisk6 /system/bin/sdcard -u 1023 -g 1023 -w 1023 \
-    -d /mnt/media_rw/usbdisk6 /storage/usbdisk6
-    class late_start
-    disabled
 
 # wifi
 service wpa_supplicant /system/bin/wpa_supplicant \
