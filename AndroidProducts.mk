@@ -15,4 +15,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/aosp_nanopi3.mk
+    $(LOCAL_DIR)/cm.mk

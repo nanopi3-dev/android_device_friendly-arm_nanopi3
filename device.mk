@@ -16,6 +16,14 @@
 
 LOCAL_PATH := device/friendly-arm/nanopi3
 
+# Device was launched with M
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.product.first_api_level=22
+
+# Boot animation
+TARGET_SCREEN_HEIGHT := 1280
+TARGET_SCREEN_WIDTH := 800
+
 # kernel
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/boot/uImage:boot/uImage

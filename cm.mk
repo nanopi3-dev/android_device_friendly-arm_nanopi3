@@ -20,7 +20,10 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 # Inherit device configuration
 $(call inherit-product, device/friendly-arm/nanopi3/device.mk)
 
-PRODUCT_NAME := aosp_nanopi3
+# Inherit some common CM stuff.
+$(call inherit-product, vendor/cm/config/common_full_phone.mk)
+
+PRODUCT_NAME := cm_nanopi3
 PRODUCT_DEVICE := nanopi3
 PRODUCT_MANUFACTURER := FriendlyARM
 PRODUCT_BRAND := FriendlyARM
