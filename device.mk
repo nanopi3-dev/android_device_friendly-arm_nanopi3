@@ -24,15 +24,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 TARGET_SCREEN_HEIGHT := 1280
 TARGET_SCREEN_WIDTH := 800
 
-# kernel
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/boot/uImage:boot/uImage
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/boot/battery.bmp:boot/battery.bmp \
-    $(LOCAL_PATH)/boot/logo.bmp:boot/logo.bmp \
-    $(LOCAL_PATH)/boot/update.bmp:boot/update.bmp
-
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/partmap_sdfs.txt:partmap.txt
 
