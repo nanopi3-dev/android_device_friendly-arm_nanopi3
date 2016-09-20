@@ -124,29 +124,6 @@ BOARD_HAS_RIL := false
 # HWC
 SLSIAP_HWC_VERSION := 2
 
-# sepolicy
-BOARD_SEPOLICY_DIRS := \
-    $(PLATFORM_PATH)/sepolicy
-
-BOARD_SEPOLICY_UNION := \
-    file_contexts \
-    genfs_contexts \
-    adbd.te \
-    app.te \
-    boardinit.te \
-    device.te \
-    domain.te \
-    file.te \
-    mediaserver.te \
-    surfaceflinger.te \
-    system_server.te \
-    init.te \
-    kernel.te \
-    servicemanager.te \
-    netd.te \
-    healthd.te \
-    sdcardd.te
-
 # ART
 ART_USE_HSPACE_COMPACT := true
 
