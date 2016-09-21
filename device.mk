@@ -148,17 +148,17 @@ $(call inherit-product, frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=131072
 
-# slsiap
+# slsiap board specific HALs
 $(call inherit-product-if-exists, hardware/samsung_slsi/slsiap/slsiap.mk)
 
-# wifi
+# Wi-Fi configs
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
 
-# See comment at the top of this file. This is where the other
-# half of the device-specific product definition file takes care
-# of the aspects that require proprietary drivers that aren't
-# commonly available
-$(call inherit-product-if-exists, vendor/nexell/s5p6818/slsiap.mk)
-$(call inherit-product-if-exists, vendor/friendly-arm/nanopi3/device-nanopi3.mk)
-$(call inherit-product-if-exists, vendor/friendly-arm/apps/device-partial.mk)
+# Wi-Fi and Bluetooth firmwares
 $(call inherit-product-if-exists, vendor/broadcom/nanopi2/device-partial.mk)
+
+# Prebuilt OpenGL stuffs
+$(call inherit-product-if-exists, vendor/nexell/s5p6818/slsiap.mk)
+
+# Prebuilt device specific proprietaries
+$(call inherit-product-if-exists, vendor/friendly-arm/nanopi3/device-nanopi3.mk)

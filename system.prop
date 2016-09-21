@@ -2,6 +2,3 @@ ro.sf.lcd_density=160
 
 # hdmi support
 persist.demo.hdmirotationlock=1
-
-# disable strict mode
-persist.sys.strictmode.disable=1
