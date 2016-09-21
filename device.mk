@@ -165,7 +165,3 @@ $(call inherit-product-if-exists, vendor/broadcom/nanopi2/device-partial.mk)
 
 # google gms
 $(call inherit-product-if-exists, vendor/google/gapps/device-partial.mk)
-
-# Nexell Application
-$(call inherit-product-if-exists, vendor/nexell/apps/nxapps.mk)
-$(call inherit-product-if-exists, vendor/nexell/apps/smartsync.mk)
