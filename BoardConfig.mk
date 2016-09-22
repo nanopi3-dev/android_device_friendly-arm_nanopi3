@@ -37,14 +37,18 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_CPU_VARIANT2  := s5p6818
 
 TARGET_NO_RECOVERY := true
-TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 TARGET_BOOTLOADER_IS_2ND := false
 
 TARGET_PROVIDES_INIT_RC  := true
 
-# Kernel
+# U-Boot
 BOARD_USES_UBOOT := true
+TARGET_UBOOT_SOURCE := uboot/friendly-arm/s5p6818
+TARGET_UBOOT_CONFIG := s5p6818_nanopi3_config
+TARGET_UBOOT_CROSS_COMPILE_PREFIX := arm-eabi-
+
+# Kernel
 BOARD_CUSTOM_BOOTIMG_MK := $(PLATFORM_PATH)/mkbootimg.mk
 BOARD_KERNEL_CMDLINE := console=ttySAC0,115200n8 androidboot.console=ttySAC0 androidboot.serialno=0123456789abcdef androidboot.selinux=permissive initrd=0x49000000,0x100000 init=/init
 BOARD_KERNEL_BASE := 0x80000000
