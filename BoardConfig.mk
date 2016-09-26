@@ -101,6 +101,9 @@ BOARD_SENSOR_TYPE := general
 EN_FFMPEG_EXTRACTOR := false
 EN_FFMPEG_AUDIO_DEC := false
 
+# GPS
+BOARD_HAS_GPS_HARDWARE := true
+
 # Nexell Dual Audio
 EN_DUAL_AUDIO := false
 
