@@ -128,6 +128,13 @@ PRODUCT_PACKAGES += \
     setup_fs \
     e2fsck
 
+# GPS
+PRODUCT_PACKAGES += \
+    gps.default
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.kernel.android.gps=ttySAC3
+
 # Connectivity
 PRODUCT_PACKAGES += \
     libwpa_client \
@@ -137,7 +144,7 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf
 
 # Product Property
-PRODUCT_PROPERTY_OVERRIDES := \
+PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0
 
 # setup dalvik vm configs.
