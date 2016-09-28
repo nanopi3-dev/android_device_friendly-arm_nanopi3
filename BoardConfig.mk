@@ -98,10 +98,6 @@ BOARD_USES_RESOL := true
 BOARD_HAS_SENSOR := false
 BOARD_SENSOR_TYPE := general
 
-# ffmpeg
-EN_FFMPEG_EXTRACTOR := false
-EN_FFMPEG_AUDIO_DEC := false
-
 # GPS
 BOARD_HAS_GPS_HARDWARE := true
 

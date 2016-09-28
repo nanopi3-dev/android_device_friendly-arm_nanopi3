@@ -77,18 +77,7 @@ Only the three quirks included above are recognized at this point:
 
 <MediaCodecs>
     <Include href="media_codecs_google_audio.xml" />
-    <!-- <Include href="media_codecs_google_telephony.xml" /> -->
     <Decoders>
-        <!-- Nexell Audio Decoder for FFMPEG -->
-        <MediaCodec name="OMX.NX.AUDIO_DECODER.FFMPEG.ac3" type="audio/ac3" />
-        <MediaCodec name="OMX.NX.AUDIO_DECODER.FFMPEG.ra" type="audio/ra" />
-        <MediaCodec name="OMX.NX.AUDIO_DECODER.FFMPEG.wma" type="audio/x-ms-wma" />
-        <MediaCodec name="OMX.NX.AUDIO_DECODER.FFMPEG.dts" type="audio/dts" />
-        <MediaCodec name="OMX.NX.AUDIO_DECODER.FFMPEG.flac" type="audio/flac" />
-        <MediaCodec name="OMX.NX.AUDIO_DECODER.FFMPEG.mpeg" type="audio/mpeg" />
-        <MediaCodec name="OMX.NX.AUDIO_DECODER.FFMPEG.mpegl1" type="audio/mpeg-L1" />
-        <MediaCodec name="OMX.NX.AUDIO_DECODER.FFMPEG.mpegl2" type="audio/mpeg-L2" />
-
         <!-- Nexell Video Decoder -->
         <MediaCodec name="OMX.NX.VIDEO_DECODER.3gpp" type="video/3gpp" />
         <MediaCodec name="OMX.NX.VIDEO_DECODER.avc" type="video/avc" />
@@ -110,4 +99,5 @@ Only the three quirks included above are recognized at this point:
         <MediaCodec name="OMX.NX.VIDEO_ENCODER.mpeg4" type="video/mp4v-es" />
     </Encoders>
     <Include href="media_codecs_google_video.xml" />
+    <Include href="media_codecs_ffmpeg.xml" />
 </MediaCodecs>
