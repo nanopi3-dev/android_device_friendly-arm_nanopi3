@@ -8,11 +8,6 @@ allow boardinit system_prop:property_service set;
 allow boardinit property_socket:sock_file write;
 unix_socket_connect(boardinit, property, init)
 
-allow boardinit self:capability {
-    dac_override
-    sys_module
-};
-
 # Runs init.${ro.hardware}.sh
 allow boardinit shell_exec:file rx_file_perms;
 allow boardinit boardinit_exec:file rx_file_perms;

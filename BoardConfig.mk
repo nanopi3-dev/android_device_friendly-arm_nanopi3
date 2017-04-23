@@ -16,6 +16,12 @@
 
 PLATFORM_PATH := device/friendly-arm/nanopi3
 
+PRODUCT_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
+
+PRODUCT_TAGS += dalvik.gc.type-precise
+
+BOARD_VENDOR := friendly-arm
+
 TARGET_BOARD_INFO_FILE := $(PLATFORM_PATH)/board-info.txt
 
 # Bootloader
@@ -43,14 +49,14 @@ TARGET_BOOTLOADER_IS_2ND := false
 TARGET_PROVIDES_INIT_RC  := true
 
 # U-Boot
-BOARD_USES_UBOOT := true
+# BOARD_USES_UBOOT := true
 TARGET_UBOOT_SOURCE := uboot/friendly-arm/s5p6818
 TARGET_UBOOT_CONFIG := s5p6818_nanopi3_config
 TARGET_UBOOT_CROSS_COMPILE_PREFIX := arm-eabi-
 
 # Kernel
 BOARD_CUSTOM_BOOTIMG_MK := $(PLATFORM_PATH)/mkbootimg.mk
-BOARD_KERNEL_CMDLINE := console=ttySAC0,115200n8 androidboot.console=ttySAC0 androidboot.serialno=0123456789abcdef androidboot.selinux=permissive initrd=0x49000000,0x100000 init=/init
+BOARD_KERNEL_CMDLINE := console=ttySAC0,115200n8 androidboot.console=ttySAC0 androidboot.serialno=0123456789abcdef initrd=0x49000000,0x100000 init=/init
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
@@ -62,6 +68,11 @@ TARGET_KERNEL_HEADER_ARCH := arm
 TARGET_KERNEL_SOURCE := kernel/friendly-arm/s5p6818
 TARGET_KERNEL_CONFIG := nanopi3_android_defconfig
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
+
+KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_PREBUILT_TAG)/arm/arm-eabi-4.8/bin
+
+# HAX: Remove once done
+BOARD_KERNEL_CMDLINE += androidboot.selinux=disabled
 
 # Recovery
 TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/recovery.fstab
@@ -124,6 +135,10 @@ endif
 
 # RIL
 BOARD_HAS_RIL := false
+
+# Sepolicy
+BOARD_SEPOLICY_DIRS := \
+    $(PLATFORM_PATH)/sepolicy
 
 # HWC
 SLSIAP_HWC_VERSION := 2

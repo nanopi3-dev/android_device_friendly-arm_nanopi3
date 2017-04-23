@@ -20,10 +20,6 @@ LOCAL_PATH := device/friendly-arm/nanopi3
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.first_api_level=22
 
-# Boot animation
-TARGET_SCREEN_HEIGHT := 1280
-TARGET_SCREEN_WIDTH := 800
-
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/partmap_sdfs.txt:partmap.txt
 
@@ -102,17 +98,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml
-
-# Screen size is "normal", density is "hdpi"
-PRODUCT_AAPT_CONFIG := normal large xlarge hdpi xhdpi
-PRODUCT_AAPT_PREF_CONFIG := hdpi
-
-PRODUCT_CHARACTERISTICS := tablet,usbstorage
-
-DEVICE_PACKAGE_OVERLAYS := \
-    $(LOCAL_PATH)/overlay
-
-PRODUCT_TAGS += dalvik.gc.type-precise
 
 PRODUCT_PACKAGES += \
     librs_jni \

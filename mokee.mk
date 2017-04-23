@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 
+include device/friendly-arm/nanopi3/BoardConfig.mk
+
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 
@@ -21,19 +23,24 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 $(call inherit-product, device/friendly-arm/nanopi3/device.mk)
 
 # Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/common_full_tablet_wifionly.mk)
+$(call inherit-product, vendor/mk/config/common_full_tablet_wifionly.mk)
 
-PRODUCT_NAME := cm_nanopi3
+PRODUCT_NAME := mk_nanopi3
 PRODUCT_DEVICE := nanopi3
-PRODUCT_MANUFACTURER := FriendlyARM
 PRODUCT_BRAND := FriendlyARM
 PRODUCT_MODEL := NanoPi 3
+PRODUCT_MANUFACTURER := FriendlyARM
 
-PRODUCT_GMS_CLIENTID_BASE := android-friendlyarm
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    BUILD_PRODUCT=NanoPi3 \
+    TARGET_DEVICE=NanoPi3
 
-TARGET_VENDOR_PRODUCT_NAME := NanoPi3
-TARGET_VENDOR_DEVICE_NAME := NanoPi3
+# AAPT
+PRODUCT_AAPT_CONFIG := normal large xlarge hdpi xhdpi xxhdpi
+PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
-PRODUCT_BUILD_PROP_OVERRIDES += TARGET_DEVICE=NanoPi3 PRODUCT_NAME=NanoPi3
+PRODUCT_CHARACTERISTICS := tablet
 
-TARGET_VENDOR := FriendlyARM
+# Resolution of boot animation
+TARGET_SCREEN_WIDTH := 405
+TARGET_SCREEN_HEIGHT := 720
